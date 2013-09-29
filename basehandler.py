@@ -31,3 +31,11 @@ class BaseHandler(webapp2.RequestHandler):
         """Set user cookie to empty in headers."""
         self.response.headers.add_header('Set-Cookie',
                                          'user=;Path=/')
+
+    def get_username(self):
+        """Check if user has a valid cookie.
+        Returns username if cookie is valid."""
+        cookie = self.request.cookies.get('user')
+        if cookie and utils.valid_cookie(cookie):
+            username = cookie.split('|')[0]
+            return username
