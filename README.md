@@ -6,4 +6,4 @@ The source codes for final project of
 
 This builds a wiki on Google App Engine.
 
-The final version can be accessed at [My Wiki](http://lttvie-wiki.appspot.com).
+The final version can be accessed at [My Wiki](http://lttviet-wiki.appspot.com).
