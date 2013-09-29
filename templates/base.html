@@ -19,7 +19,7 @@
         <h1>{% block h1 %}{% endblock %}</h1>
       </div>
       <div class="col-md-3 col-md-offset-7">
-        {% if username %}
+        {% if login == True %}
           {{username}}
             <a href="/logout">(logout)</a>
           {% else %}
