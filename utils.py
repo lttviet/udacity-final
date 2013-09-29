@@ -46,9 +46,8 @@ def signup_errors(username, password, verify):
 
 
 def make_salt():
-    return ''.join([random.choice(string.ascii_letters
-                                  + string.digits
-                                  for i in range(16))])
+    return ''.join([random.choice(string.ascii_letters + string.digits)
+                    for i in range(16)])
 
 
 def hash_password(password, salt):
@@ -90,18 +89,20 @@ def login(username, password):
     return error
 
 
-def create_page(PAGE_RE, content):
-    p = Page(page=PAGE_RE,
+def create_page(name, content):
+    p = Page(name=name,
              content=content)
     p.put()
-
-
-def get_page(PAGE_RE):
-    p = Page.query(Page.page == PAGE_RE).get()
     return p
 
 
-def update_page(PAGE_RE, content):
-    p = get_page(PAGE_RE)
+def get_page(name):
+    p = Page.query(Page.name == name).get()
+    return p
+
+
+def update_page(name, content):
+    p = get_page(name)
     p.content = content
     p.put()
+    return p
