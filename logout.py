@@ -4,6 +4,6 @@ from basehandler import BaseHandler
 
 
 class Logout(BaseHandler):
-    def get(self, pre):
+    def get(self):
         self.logout()
-        self.redirect(pre)
+        self.redirect('/')
