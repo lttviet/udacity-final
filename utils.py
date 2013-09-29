@@ -56,6 +56,8 @@ def hash_password(password, salt):
 
 
 def valid_password(password, salt, hashed):
+    salt = salt.encode('ascii')
+    hashed = hashed.encode('ascii')
     return hash_password(password, salt) == hashed
 
 
