@@ -8,9 +8,17 @@ from basehandler import BaseHandler
 
 class EditPage(BaseHandler):
     def get(self, PAGE_RE):
-        p = utils.get_page(PAGE_RE)
-        self.render('/template/editpage.html',
-                    content=p.content)
+        username = self.get_username()
+        login = True if username else False
+
+        if login:
+            p = utils.get_page(PAGE_RE)
+            self.render('/templates/editpage.html',
+                        login=login,
+                        username=username,
+                        page=p)
+        else:
+            self.response.write('Please login to edit this page.')
 
     def post(self, PAGE_RE):
         content = self.request.get('content')
