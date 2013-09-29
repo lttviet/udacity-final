@@ -17,7 +17,7 @@ class Login(BaseHandler):
         error = utils.login(username, password)
         if not error:
             self.set_cookie(username)
-            self.redirect('/')
+            self.go_back()
         else:
             self.render('/templates/login.html',
                         username=username,
