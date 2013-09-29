@@ -91,7 +91,8 @@ def login(username, password):
 
 def create_page(name, content):
     p = Page(name=name,
-             content=content)
+             content=content,
+             version=1)
     p.put()
     return p
 
@@ -104,5 +105,6 @@ def get_page(name):
 def update_page(name, content):
     p = get_page(name)
     p.content = content
+    p.version += 1
     p.put()
     return p

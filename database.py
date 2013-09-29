@@ -11,13 +11,7 @@ class User(ndb.Model):
 
 
 class Page(ndb.Model):
-    page = ndb.StringProperty(required=True)
+    name = ndb.StringProperty(required=True)
     content = ndb.TextProperty(required=True)
     updated = ndb.DateTimeProperty(auto_now=True)
-
-
-class History(ndb.Model):
     version = ndb.IntegerProperty(required=True)
-    page = ndb.StringProperty(required=True)
-    content = ndb.TextProperty(required=True)
-    updated = ndb.DateTimeProperty(auto_now=True)
