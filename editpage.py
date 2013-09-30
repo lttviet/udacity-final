@@ -18,9 +18,9 @@ class EditPage(BaseHandler):
                         username=username,
                         page=p)
         else:
-            self.response.write('Please login to edit this page.')
+            self.redirect('/login')
 
-    def post(self):
+    def post(self, PAGE_RE):
         content = self.request.get('content')
         utils.update_page(PAGE_RE, content)
-        self.go_back()
+        self.redirect(PAGE_RE)

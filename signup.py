@@ -27,4 +27,4 @@ class Signup(BaseHandler):
         else:
             utils.create_user(username, password, email)
             self.set_cookie(username)
-            self.go_back()
+            self.redirect('/')

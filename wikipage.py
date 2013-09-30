@@ -18,8 +18,7 @@ class WikiPage(BaseHandler):
                 p = utils.create_page(PAGE_RE, content)
                 self.redirect('/_edit' + PAGE_RE)
             else:
-                self.response.write('This page does not exist. '
-                                    'Please log in to create it.')
+                self.redirect('/login')
         else:
             self.render('/templates/wikipage.html',
                         login=login,

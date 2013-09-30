@@ -39,8 +39,3 @@ class BaseHandler(webapp2.RequestHandler):
         if cookie and utils.valid_cookie(cookie):
             username = cookie.split('|')[0]
             return username
-
-    def go_back(self):
-        """Redirect to previous page."""
-        next_url = self.request.headers.get('referer', '/')
-        self.redirect(next_url)
