@@ -91,22 +91,39 @@ def login(username, password):
     return error
 
 
-def create_page(name, content):
+def create_page(name, content, version=1):
     p = Page(name=name,
              content=content,
-             version=1)
+             version=version)
     p.put()
     return p
 
 
-def get_page(name):
-    p = Page.query(Page.name == name).get()
+def get_page(name, version=None):
+    p = Page.query(Page.name == name).order(-Page.version)
+    if version:
+        p = p.filter(Page.version == version)
+    p = p.get()
     return p
 
 
 def update_page(name, content):
-    p = get_page(name)
-    p.content = content
-    p.version += 1
-    p.put()
-    return p
+    latest_version = {}
+    if name in latest_version:
+        v = latest_version[name] + 1
+    else:
+        p = get_page(name)
+        if p:
+            v = int(p.version) + 1
+        else:
+            v = 1
+    latest_version[name] = v
+
+    create_page(name, content, version=v)
+
+
+def get_pages(name):
+    pages = Page.query(Page.name == name).order(-Page.version)
+    pages = pages.fetch(20)
+    pages = list(pages)
+    return pages
