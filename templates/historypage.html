@@ -1,0 +1,33 @@
+{% extends "templates/base.html" %}
+
+{% block title %}History{% endblock %}
+
+{% block body %}
+<div class="col-md-8 col-md-offset-2">
+  <table class="table table-hover">
+      <thread>
+        <tr>
+          <th>Modified</th>
+          <th>Cotent</th>
+          <th>Version</th>
+          <th>#</th>
+        </tr>
+      </thread>
+
+      <tbody>
+        {% for p in pages %}
+          <tr>
+            <td>{{p.updated}}</td>
+            <td>{{p.content|truncate(100)}}</td>
+            <td>{{p.version}}</td>
+            <td>
+              <a href="{{p.name}}/v={{p.version}}">view</a>
+              |
+              <a href="/_edit{{p.name}}/v={{p.version}}">edit</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+  </table>
+</div>
+{% endblock %}

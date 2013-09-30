@@ -2,6 +2,14 @@
 
 {% block title %}{{page.name}}{% endblock %}
 
+{% block edit_history %}
+  {% if login == True %}
+    <a href="/_edit{{page.name}}">Edit</a>
+    |
+  {% endif %}
+    <a href="/_history{{page.name}}">History</a>
+{% endblock %}
+
 {% block body %}
   <div class="col-md-8 col-md-offset-2">
     {{page.content}}
