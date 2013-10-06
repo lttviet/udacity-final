@@ -17,13 +17,13 @@
       <tbody>
         {% for p in pages %}
           <tr>
-            <td>{{p.updated}}</td>
+            <td>{{p.updated.strftime('%c')}}</td>
             <td>{{p.content|truncate(100)}}</td>
             <td>{{p.version}}</td>
             <td>
-              <a href="{{p.name}}/v={{p.version}}">view</a>
+              <a href="{{p.name}}?v={{p.key.id()}}">view</a>
               |
-              <a href="/_edit{{p.name}}/v={{p.version}}">edit</a>
+              <a href="/_edit{{p.name}}?v={{p.key.id()}}">edit</a>
             </td>
           </tr>
         {% endfor %}
