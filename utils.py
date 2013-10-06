@@ -99,11 +99,12 @@ def create_page(name, content, version=1):
     return p
 
 
-def get_page(name, version=None):
-    p = Page.query(Page.name == name).order(-Page.version)
-    if version:
-        p = p.filter(Page.version == version)
-    p = p.get()
+def get_page(name, page_id=None):
+    if page_id:
+        p = Page.get_by_id(page_id)
+    else:
+        p = Page.query(Page.name == name).order(-Page.version)
+        p = p.get(use_cache=False)
     return p
 
 
@@ -124,6 +125,6 @@ def update_page(name, content):
 
 def get_pages(name):
     pages = Page.query(Page.name == name).order(-Page.version)
-    pages = pages.fetch(20)
+    pages = pages.fetch(20, use_cache=False)
     pages = list(pages)
     return pages
