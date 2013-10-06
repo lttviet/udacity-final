@@ -12,11 +12,20 @@ class EditPage(BaseHandler):
         login = True if username else False
 
         if login:
-            p = utils.get_page(PAGE_RE)
-            self.render('/templates/editpage.html',
-                        login=login,
-                        username=username,
-                        page=p)
+            v = self.request.get('v')
+            if v and v.isdigit():
+                p = utils.get_page(PAGE_RE, page_id=int(v))
+            else:
+                p = utils.get_page(PAGE_RE)
+
+            if p is None:
+                self.error(404)
+            else:
+                self.render('/templates/editpage.html',
+                            login=login,
+                            username=username,
+                            page=p)
+
         else:
             self.redirect('/login')
 

@@ -8,7 +8,12 @@ from basehandler import BaseHandler
 
 class WikiPage(BaseHandler):
     def get(self, PAGE_RE):
-        p = utils.get_page(PAGE_RE)
+        v = self.request.get('v')
+        if v and v.isdigit():
+            p = utils.get_page(PAGE_RE, page_id=int(v))
+        else:
+            p = utils.get_page(PAGE_RE)
+
         username = self.get_username()
         login = True if username else False
 
